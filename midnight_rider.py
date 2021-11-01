@@ -57,8 +57,39 @@ class Game:
 
         # Based on their choice, change the attributes
         # of the class
+
+
+
+        agents_distance_now = random.randrange(7, 15)
+        if user_choice == "b":
+            # TODO: Implement quick travelling
+            # Move the player
+            player_distance_now = random.randrange(8, 16)
+            self.distance_travelled += player_distance_now
+            # Move agents
+            self.agents_distance += agents_distance_now - player_distance_now
+            # Burn fuel
+            self.fuel -= random.randrange(3, 5)
+            # Give player feedback
+            print(f"------!!!")
+            print(f"------You travelled {player_distance_now}kms.\n")
+        elif user_choice == "c":
+
+            # Move the player
+            player_distance_now = random.randrange(10, 16)
+            self.distance_travelled += player_distance_now
+            # Move agents
+            self.agents_distance += agents_distance_now - player_distance_now
+            # Burn fuel
+            self.fuel -= random.randrange(5, 11)
+            # Give player feedback
+            print(f"------ZOOOOOOOOOOOOOM!!!")
+            print(f"------You travelled {player_distance_now}kms.\n")
+        elif user_choice == "d":
+            self.fuel = MAX_FUEL
+
         if user_choice == "d":
-            # TODO: Choice D - Refuel or Recharge
+
             self.fuel = MAX_FUEL
 
             # Decide how far the agents go
@@ -67,7 +98,7 @@ class Game:
             # Give the user feedback
             print(midnight_rider_text.REFUEL)
         elif user_choice == "e":
-            # TODO: Print out fuel remaining
+
             print("---Status Check---")
             print(f"Distance Travelled: {self.distance_travelled} units")
             print(f"Fuel remaining: {self.fuel} 50 litres")
@@ -85,7 +116,7 @@ def main() -> None:
     while not game.done:
         game.show_choices()
         game.get_choice()
-        # TODO: Check win/lose conditions
+
 
 
 

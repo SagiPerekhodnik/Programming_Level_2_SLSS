@@ -12,11 +12,14 @@ GON GETCHU.
 
 CHOICES = """
     --- Your Choices ---
+    B. Speed at low speed
+    C. Speed ahead at full speed
     D. Stop to refuel
     E. Check current Status
     Q. Quit the game.
-    ---
+    ---👹
 """
 
 REFUEL = """ ------ You filled the fuel tank. 
 ------ The agents got closer..."""
+
