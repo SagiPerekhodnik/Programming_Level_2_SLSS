@@ -11,18 +11,21 @@ import midnight_rider_text
 # CONSTANTS
 MAX_FUEL = 50
 MAX_TOFU = 3
+MAX_HUNGER = 50
 
 class Game:
     """Represent our game engine
     Attribute:
         done: describes if the game is
             finished or not - bool
-        distance_travelled: describe the distance that weve travelled so far this game,
+        distance_travelled: describe the distance that we've travelled so far this game,
             in units
         amount_of_tofu: how much tofu we have left in our inventory
             agents_distance: describes the distance between the player and the agents
         fuel: describes the amount of fuel remaining
             starts off at 50
+        hunger: describes how hungry our player is which is represented from 0-50,
+            if a number reaches beyond 50, it's game over
     """
     def __init__(self):
         self.done = False
@@ -30,6 +33,7 @@ class Game:
         self.amount_tofu = MAX_TOFU
         self.agents_distance = -20
         self.fuel = MAX_FUEL
+        self.hunger = 0
 
 
     def introduction(self) -> None:
@@ -61,19 +65,38 @@ class Game:
 
 
         agents_distance_now = random.randrange(7, 15)
+
+        # TODO: Implement quick travelling
+        if user_choice == "a":
+            # Consume one tofu IF and ONLY we have at least ONE available
+            if self.amount_tofu > 0:
+                self.amount_tofu -= 1
+                self.hunger = 0
+                # Give the player some feedback
+                # TODO: Add text to midnight_rider_text.py
+                print(midnight_rider_text.EAT_TOFU)
+            else:
+                # Tell the player they do not have tofu
+                print(midnight_rider_text.NO_TOFU)
         if user_choice == "b":
-            # TODO: Implement quick travelling
             # Move the player
-            player_distance_now = random.randrange(8, 16)
+            player_distance_now = random.randrange(3, 8)
             self.distance_travelled += player_distance_now
+
             # Move agents
             self.agents_distance += agents_distance_now - player_distance_now
+
             # Burn fuel
-            self.fuel -= random.randrange(3, 5)
+            self.fuel -= random.randrange(5, 10)
+
             # Give player feedback
             print(f"------!!!")
             print(f"------You travelled {player_distance_now}kms.\n")
         elif user_choice == "c":
+
+    def upkeep(self) -> None:
+        """ Give the user reminders of hunger""""""
+        pass
 
             # Move the player
             player_distance_now = random.randrange(10, 16)
@@ -114,8 +137,10 @@ def main() -> None:
     # game.introduction()
 
     while not game.done:
+        game.upkeep() 
         game.show_choices()
         game.get_choice()
+        # TODO: Check win/lose conditions
 
 
 
